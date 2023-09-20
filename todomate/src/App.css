@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    gap: 80px;
+    width: 800px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.schedule-list {
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+}
+
+.schedule-type {
+    width: 65px;
+    font-size: 15px;
+    color: orange;
+    background: #464646;
+    padding: 10px 20px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.schedule input {
+    margin-top: 20px;
+    background: #242424;
+    border: none;
+    border-bottom: 1px solid orange;
+    width: 300px;
+    color: #eaeaea;
+    font-size: 16px;
+    padding: 10px;
+    display: block;
+}
+
+.schedule input:focus {
+    outline: none;
+}
+
+.schedule-view {
+    padding: 10px 20px;
+    color: white;
+    background: #464646;
+    margin-top: 10px;
+    width: fit-content;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    gap: 30px;
+    /*justify-content: space-between;*/
+}
+
+.schedule-view span {
+    margin-left: 30px;
+}
+
+.schedule-view input {
+    width: fit-content;
+    position: absolute;
+    top: -7px;
+}
+
+.schedule-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.count {
+    margin-top: 10px;
+}
+
+.count.active > div {
+    color: orange;
+}
+
+.count.clear {
+    background: #00bbff;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.count.clear > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f1f1f1;
+}
+
+.tabs {
+    display: flex;
+    width: 100px;
+    background: #464646;
+    padding: 5px;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.tab {
+    width: 50%;
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.tab > span {
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.tab.active > span {
+    color: aqua;
+}
+
+.tab.active {
+    color: white;
+    font-weight: bold;
+}
+
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.63);
+    z-index: 999;
+}
+
+.modal-closer {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+}
+
+.modal-inner {
+    width: 500px;
+    height: 260px;
+    background: #212121;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
+}
+
+.modal-top {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.modal-top > div {
+    width: 100%;
+    height: 60px;
+    background: #464646;
+    border-radius: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.modal-top > div > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+}
+
+.modal-bottom {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.modal-bottom > div {
+    display: flex;
+    gap: 10px;
+    width: 80%;
+    margin: auto;
+    cursor: pointer;
+}
+
+.modal-bottom > div > span {
+    width: 15px;
+    height: 15px;
+    background: orange;
+    border-radius: 100%;
+    margin-top: 1px;
+}
+
+.modal-bottom > div > div {
+    color: white;
+    font-size: 15px;
+}
+
+.modal-calender {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-change-btn {
+    width: 120px;
+    color: white;
+    background: #464646;
+    border-radius: 10px;
+    cursor: pointer;
+    line-height: 3;
+    text-align: center;
+}
