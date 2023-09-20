@@ -7,10 +7,11 @@ import {modalAtom, inputAtom} from "./Atom.jsx";
 export default function Modal({idx, date}) {
     const scheduleList = JSON.parse(localStorage.getItem("schedule"))
 
-    const [value, onChange] = useState(new Date());
+    const [value, onChange] = useState(new Date())
     const [calender, setCalender] = useState(false)
     const [modal, setModal] = useRecoilState(modalAtom)
     const [input, setInput] = useRecoilState(inputAtom)
+    const [memo, setMemo] = useState(false)
 
     function deleteFunc() {
         scheduleList[date].splice(scheduleList[date].indexOf(scheduleList[date].find(x=>x.idx==idx)), 1)
@@ -55,29 +56,56 @@ export default function Modal({idx, date}) {
         setModal()
     }
 
-    const ModalDOM = <>
-        <div className="modal-top">
-            <div onClick={()=> {
-                setInput(idx)
-                setModal()
-            }}><span>수정하기</span></div>
-            <div onClick={()=>deleteFunc()}><span>삭제하기</span></div>
+    function memoOn(memo=false) {
+        setMemo(memo)
+    }
+
+    function modalInsert() {
+        const textarea = document.querySelector('textarea').value
+        scheduleList[date].find(x=>x.idx==idx).memo = textarea
+        localStorage.setItem("schedule", JSON.stringify(scheduleList))
+        setModal()
+    }
+
+    function modalChange(bool) {
+        const textarea = document.querySelector('textarea').value
+        let val = bool ? textarea : ""
+        scheduleList[date].find(x=>x.idx==idx).memo = val
+        localStorage.setItem("schedule", JSON.stringify(scheduleList))
+        setModal()
+    }
+
+    function ModalDOM() {
+        const memoText = scheduleList[date].find(x=>x.idx==idx).memo
+        const memoView = memoText=="" ? null : <div className="memo-view" onClick={()=>memoOn(memoText)}>
+            {memoText}
         </div>
-        <div className="modal-bottom">
-            <div>
-                <span></span>
-                <div>메모</div>
+
+        return <>
+            <div className="modal-top">
+                <div onClick={()=> {
+                    setInput(idx)
+                    setModal()
+                }}><span>수정하기</span></div>
+                <div onClick={()=>deleteFunc()}><span>삭제하기</span></div>
             </div>
-            <div onClick={()=> todaySet()}>
-                <span></span>
-                <div>오늘하기</div>
+            <div className="modal-bottom">
+                <div onClick={()=> memoOn(true)}>
+                    <span></span>
+                    <div>메모</div>
+                </div>
+                {memoView}
+                <div onClick={()=> todaySet()}>
+                    <span></span>
+                    <div>오늘하기</div>
+                </div>
+                <div onClick={() => dayChange()}>
+                    <span></span>
+                    <div>날짜 바꾸기</div>
+                </div>
             </div>
-            <div onClick={() => dayChange()}>
-                <span></span>
-                <div>날짜 바꾸기</div>
-            </div>
-        </div>
-    </>
+        </>
+    }
 
 
     const CanlenderDOM = <div className="modal-calender">
@@ -91,15 +119,30 @@ export default function Modal({idx, date}) {
         />
     </div>
 
-    const MemoDom = <div className="memo-area">
+    function MemoDom() {
+        const modalButton = memo!=true ?
+            <div>
+                <div onClick={()=> modalChange(true)}>수정</div>
+                <div onClick={()=> modalChange(false)}>삭제</div>
+            </div> :
+            <div>
+                <div onClick={()=> modalInsert()}>확인</div>
+            </div>
 
-    </div>
+        return <div className="memo-calender">
+            <div>
+                <h5>{scheduleList[date].find(x=>x.idx==idx).schedule}</h5>
+                {modalButton}
+            </div>
+            <textarea placeholder="할일의 메모를 입력해주세요." defaultValue={memo==true ? '' : memo}></textarea>
+        </div>
+    }
 
     return <>
         <div className="modal">
             <div className="modal-closer" onClick={()=>setModal()}></div>
             <div className="modal-inner">
-                {calender ? CanlenderDOM : ModalDOM}
+                {calender ? CanlenderDOM : (memo ? MemoDom() : ModalDOM())}
             </div>
         </div>
     </>

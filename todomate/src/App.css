@@ -148,7 +148,7 @@
 
 .modal-inner {
     width: 500px;
-    height: 260px;
+    height: 300 px;
     background: #212121;
     position: absolute;
     bottom: 0;
@@ -192,7 +192,7 @@
     gap: 40px;
 }
 
-.modal-bottom > div {
+.modal-bottom > div:not(.memo-view) {
     display: flex;
     gap: 10px;
     width: 80%;
@@ -200,7 +200,7 @@
     cursor: pointer;
 }
 
-.modal-bottom > div > span {
+.modal-bottom > div:not(.memo-view) > span {
     width: 15px;
     height: 15px;
     background: orange;
@@ -208,7 +208,7 @@
     margin-top: 1px;
 }
 
-.modal-bottom > div > div {
+.modal-bottom > div:not(.memo-view) > div {
     color: white;
     font-size: 15px;
 }
@@ -226,4 +226,60 @@
     cursor: pointer;
     line-height: 3;
     text-align: center;
+}
+
+.memo-calender > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.memo-calender > div > h5 {
+    font-size: 18px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+}
+
+.memo-calender > div > div {
+    display: flex;
+    gap: 10px;
+}
+
+.memo-calender > div > div > div{
+    width: 120px;
+    color: white;
+    background: #464646;
+    border-radius: 10px;
+    cursor: pointer;
+    line-height: 3;
+    text-align: center;
+}
+
+.memo-calender > div > div > div:nth-child(2) {
+    color: #ff6c6c;
+}
+
+textarea {
+    margin-top: 20px;
+    width: calc(100% - 40px);
+    height: 150px;
+    background: #464646;
+    outline: none;
+    border: none;
+    padding: 20px;
+    color: white;
+    font-size: 15px;
+    resize: none;
+    border-radius: 10px;
+}
+
+.memo-view {
+    width: calc(80% - 20px);
+    margin: auto;
+    margin-top: -30px;
+    background: #464646;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
 }
