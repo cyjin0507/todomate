@@ -1,6 +1,6 @@
 import "./App.css";
 import {Suspense, useState} from "react";
-import {renderAtom, modalAtom, inputAtom} from './Atom.jsx'
+import {renderAtom, modalAtom, inputAtom, schduleAtom} from './Atom.jsx'
 
 import {
     RecoilRoot,
@@ -11,7 +11,7 @@ import {
 } from 'recoil';
 
 function Schedule({value, date}) {
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useRecoilState(schduleAtom)
     const [render , setRender] = useRecoilState(renderAtom)
     const [modal, setModal] = useRecoilState(modalAtom)
     const [input, setInput] = useRecoilState(inputAtom)
@@ -20,14 +20,14 @@ function Schedule({value, date}) {
 
     const [insert, setInsert] = useState(false)
 
-    function increse() {
-        setCount(count+1)
+    function increse(value) {
+        setCount(value)
     }
 
     function inputRendering() {
         const result = []
-        for (let i = 0; i < count; i++) {
-            result.push(Inputs(i, date, value, setRender))
+        if(count==value) {
+            result.push(Inputs(date, value, setRender))
         }
         return result
     }
@@ -74,7 +74,7 @@ function Schedule({value, date}) {
 
     return <>
         <div className="schedule" key={value}>
-            <div className="schedule-type" onClick={()=> increse()}>
+            <div className="schedule-type" onClick={()=> increse(value)}>
                 <span>목표{value}</span>
                 <span>+</span>
             </div>
@@ -84,7 +84,7 @@ function Schedule({value, date}) {
     </>
 }
 
-function Inputs(i, date, value, render) {
+function Inputs(date, value, render) {
     function scheduleInput(e) {
         if(window.event.keyCode === 13) {
             const text = e.target.value
@@ -115,7 +115,7 @@ function Inputs(i, date, value, render) {
         }
     }
 
-    return <input key={i} onKeyUp={(e)=>scheduleInput(e)} placeholder="입력" autoFocus/>
+    return <input key={0} onKeyUp={(e)=>scheduleInput(e)} placeholder="입력" autoFocus/>
 
 }
 

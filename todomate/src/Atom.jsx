@@ -24,3 +24,9 @@ export const inputAtom = atom({
     key : 'input',
     default : null
 })
+
+// 스케줄 입력 input
+export const schduleAtom = atom({
+    key : 'schedule',
+    default : 0
+})

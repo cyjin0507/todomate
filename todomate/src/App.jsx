@@ -5,7 +5,7 @@ import Insert from "./Insert.jsx";
 import Modal from "./Modal.jsx";
 import "./App.css";
 
-import {renderAtom, modalAtom} from './Atom.jsx'
+import {renderAtom, modalAtom, schduleAtom} from './Atom.jsx'
 
 import {
     RecoilRoot,
@@ -21,6 +21,8 @@ export default function App() {
     const [type, setType] = useState("todo")
     const [render , setRender] = useRecoilState(renderAtom)
     const [modal, setModal] = useRecoilState(modalAtom)
+    const [count, setCount] = useRecoilState(schduleAtom)
+
 
     const scheduleList = JSON.parse(localStorage.getItem("schedule"))
 
@@ -40,12 +42,9 @@ export default function App() {
         setType(type)
     }
 
-    function rendering() {
-        setRender(!render)
-    }
-
-    function modalFunc(idx) {
-        setModal(idx)
+    function calenderFunc(date) {
+        onChange(date)
+        setCount(0)
     }
 
     return <>
@@ -53,7 +52,7 @@ export default function App() {
 
             <div>
                 <Calendar
-                    onChange={onChange}
+                    onChange={calenderFunc}
                     value={value}
                     showNeighboringMonth={false}
                     tileContent={({date}) => {
