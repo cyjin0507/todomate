@@ -30,3 +30,9 @@ export const schduleAtom = atom({
     key : 'schedule',
     default : 0
 })
+
+// 일기 입력
+export const diaryAtom = atom({
+    key : 'diary',
+    default : null
+})

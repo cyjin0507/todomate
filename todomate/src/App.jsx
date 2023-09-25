@@ -5,7 +5,8 @@ import Insert from "./Insert.jsx";
 import Modal from "./Modal.jsx";
 import "./App.css";
 
-import {renderAtom, modalAtom, schduleAtom} from './Atom.jsx'
+
+import {renderAtom, modalAtom, schduleAtom, diaryAtom} from './Atom.jsx'
 
 import {
     RecoilRoot,
@@ -14,6 +15,10 @@ import {
     useRecoilState,
     useRecoilValue,
 } from 'recoil';
+import Diary from "./Diary.jsx";
+
+import {faSmile} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function App() {
@@ -22,6 +27,7 @@ export default function App() {
     const [render , setRender] = useRecoilState(renderAtom)
     const [modal, setModal] = useRecoilState(modalAtom)
     const [count, setCount] = useRecoilState(schduleAtom)
+    const [diary, setDiary] = useRecoilState(diaryAtom)
 
 
     const scheduleList = JSON.parse(localStorage.getItem("schedule"))
@@ -47,12 +53,20 @@ export default function App() {
         setCount(0)
     }
 
+    function diaryFunc(date) {
+        if(new Date() >= date) {
+            setDiary(date)
+        } else {
+            alert("미래의 일기는 작성할 수 없습니다.")
+        }
+    }
+
     return <>
         <div className="container">
 
             <div>
                 <Calendar
-                    onChange={calenderFunc}
+                    onChange={type=="todo" ? calenderFunc : diaryFunc}
                     value={value}
                     showNeighboringMonth={false}
                     tileContent={({date}) => {
@@ -61,7 +75,9 @@ export default function App() {
                         if(type == "todo") {
                             return todo(formatDate)
                         } else {
-                            return <>test</>
+                            if(new Date() >= date) {
+                                return <FontAwesomeIcon icon={faSmile} />
+                            }
                         }
                     }}
                 />
@@ -81,5 +97,6 @@ export default function App() {
 
         {modal ? <Modal idx={modal} date={value.toLocaleDateString()} /> : null}
 
+        {diary ? <Diary/> : null}
     </>
 }
