@@ -10,6 +10,7 @@ export default function Diary() {
     const [render , setRender] = useRecoilState(renderAtom)
 
     const diaryList = JSON.parse(localStorage.getItem("diary"))
+    const findList = diaryList[diary.toLocaleDateString()]
 
     function diaryClose() {
         setDiary(null)
@@ -30,7 +31,11 @@ export default function Diary() {
                     text : text
                 }
             ]
+        } else {
+            diaryList[date][0].text = text
+            diaryList[date][0].state = state
         }
+        console.log(diaryList)
         localStorage.setItem("diary", JSON.stringify(diaryList))
         setDiary(null)
         setRender(true)
@@ -50,6 +55,6 @@ export default function Diary() {
             <h5>사용자</h5>
             <p>{diary.toLocaleDateString()}</p>
         </div>
-        <textarea className="diary-textarea" placeholder="사용자님의 하루는 어떠셨나요" autoFocus></textarea>
+        <textarea className="diary-textarea" placeholder="사용자님의 하루는 어떠셨나요" autoFocus defaultValue={findList ? findList[0].text : ''}></textarea>
     </div>
 }

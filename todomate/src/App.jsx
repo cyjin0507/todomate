@@ -55,6 +55,8 @@ export default function App() {
     }
 
     function diaryFunc(date) {
+        const formatDate = date.toLocaleDateString()
+
         if(new Date() >= date) {
             setDiary(date)
         } else {
