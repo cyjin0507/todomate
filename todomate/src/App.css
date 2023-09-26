@@ -335,6 +335,7 @@ textarea {
     display: block;
     padding: 30px;
     background: #212121;
+    height: 500px;
 }
 
 .react-calendar svg {
@@ -342,4 +343,29 @@ textarea {
     margin: auto;
     margin-top: 10px;
     font-size: 20px;
+}
+
+.diary-state {
+    width: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.diary-state svg {
+    color: #464646;
+    font-size: 40px;
+}
+
+.diary-state .active svg {
+    color: white;
+}
+
+.yellow > svg {
+    color: yellow;
+}
+
+.dark > svg {
+    color: yellowgreen;
 }

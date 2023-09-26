@@ -17,7 +17,7 @@ import {
 } from 'recoil';
 import Diary from "./Diary.jsx";
 
-import {faSmile} from "@fortawesome/free-solid-svg-icons";
+import {faFaceSadCry, faFaceSmileBeam, faSmile} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
@@ -31,6 +31,7 @@ export default function App() {
 
 
     const scheduleList = JSON.parse(localStorage.getItem("schedule"))
+    const diaryList = JSON.parse(localStorage.getItem("diary"))
 
     function todo(formatDate) {
         if(scheduleList[formatDate] && scheduleList[formatDate].length != 0) {
@@ -76,7 +77,12 @@ export default function App() {
                             return todo(formatDate)
                         } else {
                             if(new Date() >= date) {
-                                return <FontAwesomeIcon icon={faSmile} />
+                                if(diaryList[formatDate] != undefined) {
+                                    let find = diaryList[formatDate][0].state
+                                    return find == 1 ? <div className="yellow"><FontAwesomeIcon icon={faFaceSmileBeam}/></div> : <div className="dark"><FontAwesomeIcon icon={faFaceSadCry}/></div>
+                                } else {
+                                    return <div><FontAwesomeIcon icon={faSmile}/></div>
+                                }
                             }
                         }
                     }}

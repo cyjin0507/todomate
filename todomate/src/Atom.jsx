@@ -18,7 +18,6 @@ export const modalAtom = atom({
     key : 'modal',
     default : null
 })
-
 // 모달에서 수정하기 눌렀을 때
 export const inputAtom = atom({
     key : 'input',
