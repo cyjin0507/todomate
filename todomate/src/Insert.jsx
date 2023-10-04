@@ -22,10 +22,11 @@ function Schedule({value, date}) {
         setCount(value)
     }
 
+
     function inputRendering() {
         const result = []
         if(count==value) {
-            result.push(Inputs(date, value, setRender))
+            result.push(Inputs(date, value, setRender, increse))
         }
         return result
     }
@@ -37,9 +38,8 @@ function Schedule({value, date}) {
         function clearFunc(e) {
             scheduleList[dateFormat].find(x=>x.idx == e.target.dataset.idx).clear = e.target.checked
             localStorage.setItem("schedule", JSON.stringify(scheduleList))
-            e.target.checked = true
 
-            setRender(true)
+            setRender(!render)
         }
 
         if(scheduleList[dateFormat] !== undefined) {
@@ -53,7 +53,7 @@ function Schedule({value, date}) {
                         result.push(
                             <div className="schedule-view" key={i}>
                                 <div>
-                                    <input type="checkbox" data-idx={x.idx} onChange={(e)=>clearFunc(e)} checked={x.clear} />
+                                    <input type="checkbox" data-idx={x.idx} onChange={(e)=>{clearFunc(e)}} defaultChecked={x.clear} />
                                     <span>{x.schedule}</span>
                                 </div>
                                 <div className="schedule-icon" onClick={()=>setModal(x.idx)}>
@@ -84,7 +84,7 @@ function Schedule({value, date}) {
     </>
 }
 
-function Inputs(date, value, render) {
+function Inputs(date, value, render, setInput) {
     function scheduleInput(e) {
         if(window.event.keyCode === 13) {
             const text = e.target.value
@@ -112,7 +112,9 @@ function Inputs(date, value, render) {
 
             localStorage.setItem("schedule", JSON.stringify(data))
             render(true)
-            // e.target.value = ''
+
+            //
+            setInput(null)
         }
     }
 
