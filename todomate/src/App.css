@@ -369,3 +369,12 @@ textarea {
 .dark > svg {
     color: yellowgreen;
 }
+
+.gap {
+    display: flex;
+    gap: 15px;
+}
+
+.red {
+    color: rgb(255, 110, 110);
+}

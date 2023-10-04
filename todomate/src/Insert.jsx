@@ -18,8 +18,6 @@ function Schedule({value, date}) {
 
     const dateFormat = date.toLocaleDateString()
 
-    const [insert, setInsert] = useState(false)
-
     function increse(value) {
         setCount(value)
     }
@@ -39,6 +37,8 @@ function Schedule({value, date}) {
         function clearFunc(e) {
             scheduleList[dateFormat].find(x=>x.idx == e.target.dataset.idx).clear = e.target.checked
             localStorage.setItem("schedule", JSON.stringify(scheduleList))
+            e.target.checked = true
+
             setRender(true)
         }
 
@@ -112,6 +112,7 @@ function Inputs(date, value, render) {
 
             localStorage.setItem("schedule", JSON.stringify(data))
             render(true)
+            // e.target.value = ''
         }
     }
 

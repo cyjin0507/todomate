@@ -35,17 +35,31 @@ export default function Diary() {
             diaryList[date][0].text = text
             diaryList[date][0].state = state
         }
-        console.log(diaryList)
         localStorage.setItem("diary", JSON.stringify(diaryList))
         setDiary(null)
         setRender(true)
     }
 
+    function diaryDelete() {
+        let date = diary.toLocaleDateString()
+        Reflect.deleteProperty(diaryList, date)
+        localStorage.setItem("diary", JSON.stringify(diaryList))
+        setDiary(null)
+        setRender(true)
+    }
+
+
     return <div className="diary">
         <div className="diary-header">
             <div onClick={()=>diaryClose()}>x</div>
             <div>일기</div>
-            <div onClick={()=> diarySet()}>완료</div>
+            {
+                findList ? <div className="gap">
+                    <div className="red" onClick={()=> diaryDelete()}>삭제</div>
+                    <div onClick={()=> diarySet()}>완료</div>
+                </div> : <div onClick={()=> diarySet()}>완료</div>
+            }
+    
         </div>
         <div className="diary-state">
             <div className={state==1 ? 'active' : ''} onClick={()=>stateChange(1)}><FontAwesomeIcon icon={faFaceSmileBeam} /></div>

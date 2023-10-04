@@ -55,13 +55,13 @@ export default function App() {
     }
 
     function diaryFunc(date) {
-        const formatDate = date.toLocaleDateString()
-
         if(new Date() >= date) {
             setDiary(date)
         } else {
             alert("미래의 일기는 작성할 수 없습니다.")
         }
+        
+        /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[\W_])$/
     }
 
     return <>
