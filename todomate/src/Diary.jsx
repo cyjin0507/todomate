@@ -1,13 +1,18 @@
 import {useRecoilState} from "recoil";
 import {diaryAtom, renderAtom} from "./Atom.jsx";
-import {faFaceSmileBeam, faFaceSadCry, faSmile} from "@fortawesome/free-solid-svg-icons";
+import {faFaceSmileBeam, faFaceSadCry, faSmile, faCny} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useState} from "react";
+import EmojiPicker from 'emoji-picker-react';
+import { func } from "prop-types";
 
 export default function Diary() {
     const [diary, setDiary] = useRecoilState(diaryAtom)
-    const [state, setState] = useState(1)
+
     const [render , setRender] = useRecoilState(renderAtom)
+    const [emoji, setEmogi] = useState(null)
+    const [modal, setModal] = useState(null)
+    const [modify, setModify] = useState(null)
 
     const diaryList = JSON.parse(localStorage.getItem("diary"))
     const findList = diaryList[diary.toLocaleDateString()]
@@ -16,24 +21,31 @@ export default function Diary() {
         setDiary(null)
     }
 
-    function stateChange(idx) {
-        setState(idx)
-    }
 
     function diarySet() {
         let text = document.querySelector('.diary-textarea').value
         let date = diary.toLocaleDateString()
+
+        if(text == "") {
+            alert("할일을 입력해주세요")
+            return
+        }
+        if(emoji == null && findList == undefined) {
+            alert("이모지를 선택해주세요")
+            return
+        }
+
         if(diaryList[date]==undefined) {
             diaryList[date] = [
                 {
                     idx : Math.floor(Math.random() * 100000000),
-                    state : state,
+                    state : emoji ? emoji : findList[0].state,
                     text : text
                 }
             ]
         } else {
             diaryList[date][0].text = text
-            diaryList[date][0].state = state
+            diaryList[date][0].state = emoji ? emoji : findList[0].state
         }
         localStorage.setItem("diary", JSON.stringify(diaryList))
         setDiary(null)
@@ -48,22 +60,50 @@ export default function Diary() {
         setRender(true)
     }
 
+    function emogiFunc(emojiData) {
+        setEmogi(emojiData.emoji)
+    }
 
-    return <div className="diary">
+    function openModal() {
+        setModal(1)
+    }
+
+    function closeModal() {
+        setModal(null)
+    }
+
+    function diaryModify() {
+        setModify(1)
+    }
+
+    return findList && modify==null ? 
+    <div className="modal">
+        <div className="modal-closer" onClick={()=>diaryClose()}></div>
+        <div className="modal-inner">
+            <div className="diary-modal">
+                <div>
+                    <p>일기</p>
+                    <div>
+                        <div onClick={()=> diaryModify()}>수정</div>
+                        <div className="red" onClick={()=> diaryDelete()}>삭제</div>
+                    </div>
+                </div>
+                <div>{findList[0].state}</div>
+                <div>{diary.toLocaleDateString()}</div>
+                <div>{findList[0].text}</div>
+            </div>
+        </div>
+    </div>
+    : 
+    <div>
+    <div className="diary">
         <div className="diary-header">
             <div onClick={()=>diaryClose()}>x</div>
             <div>일기</div>
-            {
-                findList ? <div className="gap">
-                    <div className="red" onClick={()=> diaryDelete()}>삭제</div>
-                    <div onClick={()=> diarySet()}>완료</div>
-                </div> : <div onClick={()=> diarySet()}>완료</div>
-            }
-    
+            <div onClick={()=> diarySet()}>완료</div>
         </div>
-        <div className="diary-state">
-            <div className={state==1 ? 'active' : ''} onClick={()=>stateChange(1)}><FontAwesomeIcon icon={faFaceSmileBeam} /></div>
-            <div className={state==2 ? 'active' : ''} onClick={()=>stateChange(2)}><FontAwesomeIcon icon={faFaceSadCry} /></div>
+        <div className="diary-state" onClick={()=>openModal()}>
+            <div>{emoji ? emoji : (findList ? findList[0].state : '+')}</div>
         </div>
         <div className="diary-user-info">
             <h5>사용자</h5>
@@ -71,4 +111,18 @@ export default function Diary() {
         </div>
         <textarea className="diary-textarea" placeholder="사용자님의 하루는 어떠셨나요" autoFocus defaultValue={findList ? findList[0].text : ''}></textarea>
     </div>
+
+    {
+        modal ? <div className="modal">
+        <div className="modal-closer" onClick={()=>closeModal()}></div>
+        <div className="modal-inner">
+            <EmojiPicker 
+                onEmojiClick={emogiFunc}
+                width={500}
+            />
+        </div>
+    </div> : null
+    }
+
+</div>    
 }

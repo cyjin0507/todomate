@@ -81,7 +81,7 @@ export default function App() {
                             if(new Date() >= date) {
                                 if(diaryList[formatDate] != undefined) {
                                     let find = diaryList[formatDate][0].state
-                                    return find == 1 ? <div className="yellow"><FontAwesomeIcon icon={faFaceSmileBeam}/></div> : <div className="dark"><FontAwesomeIcon icon={faFaceSadCry}/></div>
+                                    return <div className="imogi">{find}</div>
                                 } else {
                                     return <div><FontAwesomeIcon icon={faSmile}/></div>
                                 }

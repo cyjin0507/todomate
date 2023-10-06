@@ -306,6 +306,10 @@ textarea {
     font-size: 35px;
 }
 
+.diary-header > div:nth-child(2) {
+    margin-left: 10px;
+}
+
 .diary-header > div {
     display: flex;
     align-items: center;
@@ -345,12 +349,28 @@ textarea {
     font-size: 20px;
 }
 
+.imogi {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
 .diary-state {
-    width: 100px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
     margin: auto;
-    display: flex;
-    justify-content: space-between;
     margin-top: 20px;
+    border: 1px dotted white;
+    position: relative;
+}
+
+.diary-state > div {
+    color: white;
+    font-size: 30px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .diary-state svg {
@@ -370,11 +390,54 @@ textarea {
     color: yellowgreen;
 }
 
-.gap {
-    display: flex;
-    gap: 15px;
-}
-
 .red {
     color: rgb(255, 110, 110);
+}
+
+.diary-modal {
+    padding: 20px;
+    padding-bottom: 50px;
+}
+
+.diary-modal > div:nth-child(1) {
+    position: relative;
+}
+
+.diary-modal > div:nth-child(1) > p {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.diary-modal > div:nth-child(1) > div {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    right: 0;
+    top: 0;
+}
+
+.diary-modal > div:nth-child(1) {
+    color: #eaeaea;
+    font-size: 15px;
+}
+
+.diary-modal > div:nth-child(2) {
+    margin: auto;
+    margin-top: 20px;
+    font-size: 60px;
+    width: fit-content;
+}
+
+.diary-modal > div:nth-child(3) {
+    margin-top: 10px;
+    color: rgb(176, 176, 176);
+    font-size: 13px;
+}
+
+.diary-modal > div:nth-child(4) {
+    margin-top: 15px;
+    color: white;
+    font-size: 16px;
 }
