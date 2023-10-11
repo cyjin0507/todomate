@@ -7,7 +7,7 @@ import {modalAtom, inputAtom} from "./Atom.jsx";
 export default function Modal({idx, date}) {
     const scheduleList = JSON.parse(localStorage.getItem("schedule"))
 
-    const [value, onChange] = useState(new Date())
+    const [date, setDate] = useState(new Date())
     const [calender, setCalender] = useState(false)
     const [modal, setModal] = useRecoilState(modalAtom)
     const [input, setInput] = useRecoilState(inputAtom)
@@ -40,7 +40,7 @@ export default function Modal({idx, date}) {
     }
 
     function dayChageFunc() {
-        const chageDate = value.toLocaleDateString()
+        const chageDate = date.toLocaleDateString()
         const changeData = scheduleList[date].find(x=>x.idx==idx)
 
         scheduleList[date].splice(scheduleList[date].indexOf(changeData), 1)
@@ -113,8 +113,8 @@ export default function Modal({idx, date}) {
             <div className="date-change-btn" onClick={()=>dayChageFunc()}>확인</div>
         </div>
         <Calendar
-            onChange={onChange}
-            value={value}
+            onChange={setDate}
+            value={date}
             showNeighboringMonth={false}
         />
     </div>

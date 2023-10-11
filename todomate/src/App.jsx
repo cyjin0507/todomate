@@ -22,7 +22,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export default function App() {
-    const [value, onChange] = useState(new Date());
+    const [date, setDate] = useState(new Date());
     const [type, setType] = useState("todo")
     const [render , setRender] = useRecoilState(renderAtom)
     const [modal, setModal] = useRecoilState(modalAtom)
@@ -50,7 +50,7 @@ export default function App() {
     }
 
     function calenderFunc(date) {
-        onChange(date)
+        setDate(date)
         setCount(0)
     }
 
@@ -70,7 +70,7 @@ export default function App() {
             <div>
                 <Calendar
                     onChange={type=="todo" ? calenderFunc : diaryFunc}
-                    value={value}
+                    value={date}
                     showNeighboringMonth={false}
                     tileContent={({date}) => {
                         const formatDate = date.toLocaleDateString()
@@ -98,12 +98,12 @@ export default function App() {
             </div>
 
             <div className="schedule-list">
-                <Insert date={value} />
+                <Insert date={date} />
             </div>
 
         </div>
 
-        {modal ? <Modal idx={modal} date={value.toLocaleDateString()} /> : null}
+        {modal ? <Modal idx={modal} date={date.toLocaleDateString()} /> : null}
 
         {diary ? <Diary/> : null}
     </>
