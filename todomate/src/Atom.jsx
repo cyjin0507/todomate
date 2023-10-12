@@ -14,7 +14,7 @@ export const renderAtom = atom({
 });
 
 // 모달 띄워졌는지 체크
-export const modalAtom = atom({
+export const modalTodoId = atom({
     key : 'modal',
     default : null
 })
@@ -31,7 +31,7 @@ export const schduleAtom = atom({
 })
 
 // 일기 입력
-export const diaryAtom = atom({
+export const selectedDiary = atom({
     key : 'diary',
     default : null
 })

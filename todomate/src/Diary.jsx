@@ -1,5 +1,5 @@
 import {useRecoilState} from "recoil";
-import {diaryAtom, renderAtom} from "./Atom.jsx";
+import {selectedDiary, renderAtom} from "./Atom.jsx";
 import {faFaceSmileBeam, faFaceSadCry, faSmile, faCny} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useState} from "react";
@@ -7,7 +7,7 @@ import EmojiPicker from 'emoji-picker-react';
 import { func } from "prop-types";
 
 export default function Diary() {
-    const [diary, setDiary] = useRecoilState(diaryAtom)
+    const [diary, setDiary] = useRecoilState(selectedDiary)
 
     const [render , setRender] = useRecoilState(renderAtom)
     const [emoji, setEmogi] = useState(null)

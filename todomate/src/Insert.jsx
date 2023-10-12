@@ -1,6 +1,6 @@
 import "./App.css";
 import {Suspense, useState} from "react";
-import {renderAtom, modalAtom, inputAtom, schduleAtom} from './Atom.jsx'
+import {renderAtom, modalTodoId, inputAtom, schduleAtom} from './Atom.jsx'
 
 import {
     RecoilRoot,
@@ -13,7 +13,7 @@ import {
 function Schedule({value, date}) {
     const [count, setCount] = useRecoilState(schduleAtom)
     const [render , setRender] = useRecoilState(renderAtom)
-    const [modal, setModal] = useRecoilState(modalAtom)
+    const [modal, setModal] = useRecoilState(modalTodoId)
     const [input, setInput] = useRecoilState(inputAtom)
 
     const dateFormat = date.toLocaleDateString()
