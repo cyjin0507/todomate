@@ -1,0 +1,68 @@
+{
+  "hash": "342b3f14",
+  "browserHash": "f48ddc0d",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "678a2133",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "50ab067a",
+      "needsInterop": true
+    },
+    "recoil": {
+      "src": "../../node_modules/recoil/es/index.js",
+      "file": "recoil.js",
+      "fileHash": "da9f7f92",
+      "needsInterop": false
+    },
+    "react-calendar": {
+      "src": "../../node_modules/react-calendar/dist/esm/index.js",
+      "file": "react-calendar.js",
+      "fileHash": "ff621c4c",
+      "needsInterop": false
+    },
+    "@fortawesome/free-solid-svg-icons": {
+      "src": "../../node_modules/@fortawesome/free-solid-svg-icons/index.mjs",
+      "file": "@fortawesome_free-solid-svg-icons.js",
+      "fileHash": "17c3f0ec",
+      "needsInterop": false
+    },
+    "@fortawesome/react-fontawesome": {
+      "src": "../../node_modules/@fortawesome/react-fontawesome/index.es.js",
+      "file": "@fortawesome_react-fontawesome.js",
+      "fileHash": "70fa3795",
+      "needsInterop": false
+    },
+    "emoji-picker-react": {
+      "src": "../../node_modules/emoji-picker-react/dist/emoji-picker-react.esm.js",
+      "file": "emoji-picker-react.js",
+      "fileHash": "9cb7a0f2",
+      "needsInterop": false
+    },
+    "prop-types": {
+      "src": "../../node_modules/prop-types/index.js",
+      "file": "prop-types.js",
+      "fileHash": "49a4b839",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-DZXRV6RW": {
+      "file": "chunk-DZXRV6RW.js"
+    },
+    "chunk-ZAUFE7H7": {
+      "file": "chunk-ZAUFE7H7.js"
+    },
+    "chunk-LBA6TGOY": {
+      "file": "chunk-LBA6TGOY.js"
+    },
+    "chunk-UXIASGQL": {
+      "file": "chunk-UXIASGQL.js"
+    }
+  }
+}
