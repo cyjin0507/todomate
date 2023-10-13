@@ -11,24 +11,15 @@ import {
 } from 'recoil';
 
 function Schedule({value, date}) {
-    const [count, setCount] = useRecoilState(schduleAtom)
+    const [inputNumber, setInputNumber] = useRecoilState(schduleAtom)
     const [render , setRender] = useRecoilState(renderAtom)
     const [modal, setModal] = useRecoilState(modalTodoId)
     const [input, setInput] = useRecoilState(inputAtom)
 
     const dateFormat = date.toLocaleDateString()
 
-    function increse(value) {
-        setCount(value)
-    }
-
-
-    function inputRendering() {
-        const result = []
-        if(count==value) {
-            result.push(Inputs(date, value, setRender, increse))
-        }
-        return result
+    function changeInputNumber(value) {
+        setInputNumber(value)
     }
 
     function schduleRendering() {
@@ -74,12 +65,12 @@ function Schedule({value, date}) {
 
     return <>
         <div className="schedule" key={value}>
-            <div className="schedule-type" onClick={()=> increse(value)}>
+            <div className="schedule-type" onClick={()=> changeInputNumber(value)}>
                 <span>목표{value}</span>
                 <span>+</span>
             </div>
             {schduleRendering()}
-            {inputRendering()}
+            {inputNumber == value ? Inputs(date, value, setRender, changeInputNumber) : ''}
         </div>
     </>
 }
