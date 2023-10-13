@@ -39,7 +39,7 @@ export default function Diary() {
             return
         }
 
-        if (diaryList[date] === ndefined) {
+        if (diaryList[date] === undefined) {
             diaryList[date] = [
                 {
                     idx: Math.floor(Math.random() * 100000000),
@@ -58,7 +58,8 @@ export default function Diary() {
 
     function deleteDiary() {
         let date = diary.toLocaleDateString()
-        Reflect.deleteProperty(diaryList, date)
+        delete diaryList[date];
+
         localStorage.setItem("diary", JSON.stringify(diaryList))
         setDiary(null)
         setRender(true)
